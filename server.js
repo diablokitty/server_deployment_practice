@@ -3,6 +3,14 @@
 const express = require('express');
 const app = express(); // this is our app singleton
 
+app.get('/', (request, response) => {
+  try {
+    response.status(200).send('Proof of life');
+  } catch(e) {
+    console.log(e);
+  }
+});
+
 // request parameter
 app.get('/params/:name', (request, response) => {
   let name = request.params.name;
@@ -27,4 +35,11 @@ app.get('/hello', (request, response) => {
   });
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  start: (port) => {
+    app.listen(port, () => {
+      console.log(`Server Up on ${port}`);
+    });
+  },
+};
