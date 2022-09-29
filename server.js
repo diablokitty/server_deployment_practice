@@ -3,6 +3,14 @@
 const express = require('express');
 const app = express(); // this is our app singleton
 
+app.get('/', (request, response) => {
+  try {
+    response.status(200).send('Proof of life');
+  } catch(e) {
+    console.log(e);
+  }
+});
+
 // request parameter
 app.get('/params/:name', (request, response) => {
   let name = request.params.name;
